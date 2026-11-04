@@ -1,0 +1,21 @@
+name: SOAR CI/CD
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "soar/**"
+
+jobs:
+  deploy-soar:
+    runs-on: self-hosted
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+
+      - name: Check Python syntax
+        run: python3 -m py_compile soar/main.py
+
+      - name: Show deployment target
+        run: echo "SOAR deployment target is AWS EC2"
