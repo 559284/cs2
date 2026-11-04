@@ -1,0 +1,21 @@
+name: Test Netlab Runner
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: self-hosted
+
+    steps:
+      - name: Show hostname
+        run: hostname
+
+      - name: Show user
+        run: whoami
+
+      - name: Show system
+        run: uname -a
+
+      - name: Test internet
+        run: curl -I https://github.com
