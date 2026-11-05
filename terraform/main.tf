@@ -112,6 +112,14 @@ resource "aws_security_group" "soar_sg" {
     cidr_blocks = ["192.168.20.0/24"]
   }
 
+  ingress {
+    description = "Allow ICMP from monitoring network"
+    from_port   = -1
+    to_port     = -1
+    protocol    = "icmp"
+    cidr_blocks = ["192.168.20.0/24"]
+  }
+
   # Allow outbound traffic.
   # This will only work once the private subnet receives an outbound route.
   egress {
@@ -237,7 +245,9 @@ resource "aws_instance" "nat" {
   instance_type               = "t3.micro"
   subnet_id                   = aws_subnet.public_subnet.id
   associate_public_ip_address = true
-
+  lifecycle {
+  ignore_changes = [user_data]
+}
   vpc_security_group_ids = [aws_security_group.nat_sg.id]
 
   source_dest_check = false
