@@ -246,8 +246,8 @@ resource "aws_instance" "nat" {
   subnet_id                   = aws_subnet.public_subnet.id
   associate_public_ip_address = true
   lifecycle {
-  ignore_changes = [user_data]
-}
+    ignore_changes = [user_data]
+  }
   vpc_security_group_ids = [aws_security_group.nat_sg.id]
 
   source_dest_check = false
