@@ -262,3 +262,4 @@ async def receive_alert(request: Request):
         "incidents_processed": len(incidents),
         "incidents": incidents
     }
+# cicd test
