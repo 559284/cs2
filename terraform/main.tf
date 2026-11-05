@@ -242,7 +242,7 @@ resource "aws_instance" "nat" {
 
   source_dest_check = false
 
-    user_data = <<-EOF
+  user_data = <<-EOF
 #!/bin/bash
 
 echo "net.ipv4.ip_forward=1" > /etc/sysctl.d/99-nat.conf
