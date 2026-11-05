@@ -10,12 +10,21 @@ jobs:
   deploy-soar:
     runs-on: self-hosted
 
+    env:
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      AWS_SESSION_TOKEN: ${{ secrets.AWS_SESSION_TOKEN }}
+      AWS_DEFAULT_REGION: eu-central-1
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v7
 
       - name: Check Python syntax
         run: python3 -m py_compile soar/main.py
+
+      - name: Test AWS credentials
+        run: aws sts get-caller-identity
 
       - name: Deploy SOAR with AWS SSM
         run: |
