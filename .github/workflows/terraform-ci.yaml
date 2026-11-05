@@ -2,6 +2,7 @@ name: Terraform CI
 
 on:
   workflow_dispatch:
+
   push:
     paths:
       - "terraform/**"
@@ -32,6 +33,11 @@ jobs:
       - name: Test AWS credentials
         run: aws sts get-caller-identity
 
+      - name: Restore Terraform state
+        run: |
+          cp /home/student/terraform-state/terraform.tfstate ./terraform.tfstate
+          echo "Terraform state restored"
+
       - name: Terraform Init
         run: terraform init
 
@@ -42,4 +48,14 @@ jobs:
         run: terraform validate
 
       - name: Terraform Plan
-        run: terraform plan
+        run: terraform plan -out=tfplan
+
+      - name: Terraform Apply
+        if: github.event_name == 'workflow_dispatch'
+        run: terraform apply -auto-approve tfplan
+
+      - name: Save Terraform state
+        if: github.event_name == 'workflow_dispatch'
+        run: |
+          cp terraform.tfstate /home/student/terraform-state/terraform.tfstate
+          echo "Updated Terraform state saved"
