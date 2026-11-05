@@ -1,4 +1,3 @@
-```yaml
 name: SOAR CI/CD
 
 on:
@@ -56,4 +55,3 @@ jobs:
             --region eu-central-1 \
             --query '[Status,StandardOutputContent,StandardErrorContent]' \
             --output text
-```
