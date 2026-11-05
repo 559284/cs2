@@ -3,7 +3,7 @@ from fastapi.responses import PlainTextResponse
 from datetime import datetime
 from prometheus_client import Counter, generate_latest, CONTENT_TYPE_LATEST
 import json
-
+#cocd test
 
 app = FastAPI()
 
