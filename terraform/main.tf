@@ -354,3 +354,9 @@ resource "aws_vpn_gateway_route_propagation" "public_rt" {
   vpn_gateway_id = aws_vpn_gateway.vgw.id
   route_table_id = aws_route_table.public_rt.id
 }
+
+resource "aws_security_group" "test_sg" {
+  name        = "test-sg"
+  description = "Temporary security group for testing the Terraform pipeline"
+  vpc_id      = aws_vpc.main.id
+}
