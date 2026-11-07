@@ -1,3 +1,8 @@
+resource "aws_security_group" "test_sg" {
+  name        = "test-sg"
+  description = "Temporary security group for testing the Terraform pipeline"
+  vpc_id      = "vpc-02341fff5afaea60a"
+}
 # -------------------------
 # VPC
 # -------------------------
