@@ -1,7 +1,7 @@
 resource "aws_security_group" "test_sg" {
   name        = "test-sg"
   description = "Temporary security group for testing the Terraform pipeline"
-  vpc_id      = aws_vpc.main.id
+  vpc_id      = "vpc-02341fff5afaea60a"
 }
 
 # -------------------------
